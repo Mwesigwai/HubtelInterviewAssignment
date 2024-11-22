@@ -8,41 +8,57 @@ using Hubtel.Interview.Assignment.UserWallet.Types;
 namespace Hubtel.Interview.Assignment.UserWallet.Services;
 public class WalletService : IWalletService
 {
+
     private readonly IRelationaDbWalletsRepository _walletRepository;
-    private readonly IErrorHandler<List<WalletModel>, string> _errorHandler;
-    public WalletService(IRelationaDbWalletsRepository walletsRepository)
+    private readonly IErrorHandlerStrategyFactory _errorHandlerStrategyFactory;
+
+    public WalletService(
+        IRelationaDbWalletsRepository walletsRepository,
+        IErrorHandlerStrategyFactory errorHandlerStrategyFactory)
     {
         _walletRepository = walletsRepository;
-        _errorHandler = BuildErrorHandlerChain<List<WalletModel>, string>();
+        _errorHandlerStrategyFactory = errorHandlerStrategyFactory;
     }
 
     public async Task<IWalletOperationResult<string>> CreateNewWalletAsync(WalletModelDto walletDto)
     {
-        var getWalletsRepositoryResult = await _walletRepository.GetAllWalletsAsync(walletDto.Owner);
-        if (GetWalletsFailed(getWalletsRepositoryResult))
+        try
         {
-            return _errorHandler.HandleError(getWalletsRepositoryResult)!;
+            var getWalletsRepositoryResult = await _walletRepository.GetAllWalletsAsync(walletDto.Owner);
+            if (GetWalletsFailed(getWalletsRepositoryResult))
+            {
+                var error = _errorHandlerStrategyFactory.GetStrategy<List<WalletModel>, string>().HandleError(getWalletsRepositoryResult);
+                return PresentError(error, inCaseOfInternalError: "An internal error occured while creating wallet");
+            }
+            
+            var wallets = getWalletsRepositoryResult.Data;
+            if (!UserCanCreateMoreWallets(wallets))
+            {
+                return new BadRequestWalletOperationResult<string>(){
+                    Message = "A single person can't create more than five wallets.", 
+                    Data = null,
+                    Success = false
+                };
+            }
+            
+            if (UserIsCreatingDuplicateWallet(walletDto, getWalletsRepositoryResult.Data!))
+            {
+                return new BadRequestWalletOperationResult<string>{
+                    Message = "Wallet already exists",
+                    Success = false,
+                    Data = null
+                };
+            }
+            return await TryCreateWallet(walletDto);
         }
-        
-        var wallets = getWalletsRepositoryResult.Data;
-        if (!UserCanCreateMoreWallets(wallets))
+        catch (Exception)
         {
-            return new BadRequestWalletOperationResult<string>(){
-                Message = "A single person can't create more than five wallets.", 
-                Data = null,
-                Success = false
-            };
-        }
-        
-        if (UserIsCreatingDuplicateWallet(walletDto, getWalletsRepositoryResult.Data!))
-        {
-            return new BadRequestWalletOperationResult<string>{
-                Message = "Wallet already exists",
+            return new InternalErrorWalletOperationResult<string>{
+                Message = "An internal error occured while processing.",
                 Success = false,
                 Data = null
             };
         }
-        return await TryCreateWallet(walletDto);
     }
 
     public async Task<IWalletOperationResult<List<WalletModelDto>>> GetAllWalletsAsync(string ownerPhoneNumber)
@@ -57,28 +73,28 @@ public class WalletService : IWalletService
         }
 
         var getAllWalletsResult = await _walletRepository.GetAllWalletsAsync(ownerPhoneNumber);
-        if (getAllWalletsResult is BadRequestWalletOperationResult<List<WalletModel>> badRequest)
+        try
         {
-            return new BadRequestWalletOperationResult<List<WalletModelDto>>{
-                Message = badRequest.Message,
-                Data = null,
-                Success = badRequest.Success
+            if (getAllWalletsResult is not SuccessWalletOperationResult<List<WalletModel>>)
+            {
+                var error = _errorHandlerStrategyFactory.GetStrategy<List<WalletModel>, List<WalletModelDto>>().HandleError(getAllWalletsResult);
+                return PresentError(error, inCaseOfInternalError: "an internal error occured while getting wallets");
+            }
+
+            return new SuccessWalletOperationResult<List<WalletModelDto>>{
+                Data = await getAllWalletsResult.Data!.ToListOfWalletDtoAsync(),
+                Message = "Success",
+                Success = true
             };
         }
-        if (getAllWalletsResult is InternalErrorWalletOperationResult<List<WalletModel>> internalError)
+        catch (Exception)
         {
             return new InternalErrorWalletOperationResult<List<WalletModelDto>>{
-                Message = internalError.Message,
-                Success = internalError.Success,
+                Message = "An internal error occured while processing.",
+                Success = false,
                 Data = null
-            };
+            }; 
         }
-
-        return new SuccessWalletOperationResult<List<WalletModelDto>>{
-            Data = await getAllWalletsResult.Data!.ToListOfWalletDtoAsync(),
-            Message = "Success",
-            Success = true
-        };
     }
 
     public async Task<IWalletOperationResult<WalletModelDto>> GetSingleWalletByIdAsync(string walletId)
@@ -93,49 +109,39 @@ public class WalletService : IWalletService
         }
 
         var repositoryResult = await _walletRepository.GetSingleWalletByIdAsync(walletId);
-        if (repositoryResult is InternalErrorWalletOperationResult<WalletModel> internalError)
+        try
         {
-            return new InternalErrorWalletOperationResult<WalletModelDto>{
-                Message = internalError.Message,
-                Data = null,
-                Success = false
+            if (repositoryResult is not SuccessWalletOperationResult<WalletModelDto>)
+            {
+                var error = _errorHandlerStrategyFactory.GetStrategy<WalletModel, WalletModelDto>().HandleError(repositoryResult!);
+                return PresentError(error, inCaseOfInternalError: "An internal error occured while getting wallet");
+            }
+
+            return new SuccessWalletOperationResult<WalletModelDto>{
+                Data = await repositoryResult.Data!.ToWalletDtoAsync(),
+                Message = repositoryResult.Message,
+                Success = true
             };
         }
-
-        if (repositoryResult is BadRequestWalletOperationResult<WalletModel> badRequest)
+        catch (Exception)
         {
-            return new BadRequestWalletOperationResult< WalletModelDto>{
-                Message = badRequest.Message,
+            return new InternalErrorWalletOperationResult<WalletModelDto>{
+                Message = "An internal error occured.",
                 Success = false,
                 Data = null
             };
         }
-
-        return new SuccessWalletOperationResult<WalletModelDto>{
-            Data = await repositoryResult.Data!.ToWalletDtoAsync(),
-            Message = repositoryResult.Message,
-            Success = true
-        };
     }
 
     public async Task<IWalletOperationResult<bool>> RemoveWalletAsync(string walletId)
     {
         var result = await _walletRepository.RemoveWalletAsync(walletId);
-        if (!result.Success)
-
-            _errorHandler.HandleError(//);
+        if (result is not SuccessWalletOperationResult<bool>)
+        {
+            return PresentError(result, inCaseOfInternalError:"An internal error occured");
+        }
             
         return result;
-    }
-
-    public static IErrorHandler<T, TOutput> BuildErrorHandlerChain<T, TOutput>()
-    {
-        var badRequestHandler = new BadRequestErrorHandler<T, TOutput>();
-        var internalErrorHandler = new InternalErrorHandler<T, TOutput>();
-        var notFoundErrorHandler = new NotFoundErrorHandler<T, TOutput>();
-
-        badRequestHandler.SetNext(notFoundErrorHandler).SetNext(internalErrorHandler);
-        return badRequestHandler;
     }
 
     private static bool GetWalletsFailed(IWalletOperationResult<List<WalletModel>> getWalletRepositoryResult)
@@ -172,4 +178,17 @@ public class WalletService : IWalletService
             };
         }
     }
+
+    private IWalletOperationResult<T> PresentError<T>(IWalletOperationResult<T>? error, string inCaseOfInternalError)
+    {
+        if (error is not null)
+            return error;
+
+        return new InternalErrorWalletOperationResult<T>{
+            Message = inCaseOfInternalError,
+            Success = false,
+            Data = default
+        };
+    }
+
 }

@@ -1,9 +1,9 @@
 using Hubtel.Interview.Assignment.UserWallet.Types;
 
 namespace Hubtel.Interview.Assignment.UserWallet.ErrorHandlers;
-public class BadRequestErrorHandler<T, TError> : BaseErrorHandler<T, TError>
+public class BadRequestErrorHandler<TInput, TError> : BaseErrorHandler<TInput, TError>
 {
-    protected override IWalletOperationResult<TError>? ProcessError(IWalletOperationResult<T> errorResult)
+    protected override IWalletOperationResult<TError>? ProcessError(IWalletOperationResult<TInput> errorResult)
     {
         if (errorResult is BadRequestWalletOperationResult<TError> badRequest)
         {

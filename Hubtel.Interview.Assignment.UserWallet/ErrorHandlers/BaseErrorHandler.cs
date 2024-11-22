@@ -8,7 +8,7 @@ public abstract class BaseErrorHandler<TInput, TOutput> : IErrorHandler<TInput, 
     public IWalletOperationResult<TOutput>? HandleError(IWalletOperationResult<TInput> errorResult)
     {
         var result = ProcessError(errorResult);
-        if (result != null)
+        if (result is not null)
             return result;
 
         return _nextErrorHandler?.HandleError(errorResult);

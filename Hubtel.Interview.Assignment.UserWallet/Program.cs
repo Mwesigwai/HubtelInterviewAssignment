@@ -1,5 +1,6 @@
 using AutoMapper;
 using Hubtel.Interview.Assignment.UserWallet.Data;
+using Hubtel.Interview.Assignment.UserWallet.ErrorHandlers;
 using Hubtel.Interview.Assignment.UserWallet.Mappers;
 using Hubtel.Interview.Assignment.UserWallet.Repositories;
 using Hubtel.Interview.Assignment.UserWallet.Services;
@@ -14,6 +15,7 @@ builder.Services.AddDbContext<WalletApiDbContext>(options => options.UseInMemory
 builder.Services.AddAutoMapper(typeof(WalletMappingProfile));
 builder.Services.AddScoped<IRelationaDbWalletsRepository, RelationalDbWalletsRepository>();
 builder.Services.AddScoped<IWalletService, WalletService>();
+builder.Services.AddScoped<IErrorHandlerStrategyFactory, ErrorHandlerStrategyFactory>();
 
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
