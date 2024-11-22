@@ -1,4 +1,3 @@
-using System.Security.Cryptography;
 using Hubtel.Interview.Assignment.UserWallet.Data;
 using Hubtel.Interview.Assignment.UserWallet.Models;
 using Hubtel.Interview.Assignment.UserWallet.Types;
@@ -58,7 +57,7 @@ public class RelationalDbWalletsRepository : IRelationaDbWalletsRepository
 
             if (!wallets.Any())
             {
-                return new BadRequestWalletOperationResult<List<WalletModel>>(){
+                return new NotFoundWalletOperationResult<List<WalletModel>>(){
                     Success = false,
                     Message = $"No wallets found for the owner with phone number {ownerPhoneNumber}.",
                     Data = null
@@ -95,7 +94,7 @@ public class RelationalDbWalletsRepository : IRelationaDbWalletsRepository
 
             if (wallet is null)
             {
-                return new BadRequestWalletOperationResult<WalletModel?>{
+                return new NotFoundWalletOperationResult<WalletModel?>{
                     Success = false,
                     Message = $"Wallet with ID '{walletId}' was not found.",
                     Data = null
@@ -130,7 +129,7 @@ public class RelationalDbWalletsRepository : IRelationaDbWalletsRepository
 
             if (wallet is null)
             {
-                return new BadRequestWalletOperationResult<bool>{
+                return new NotFoundWalletOperationResult<bool>{
                     Success = false,
                     Message = "Wallet not found.",
                     Data = false

@@ -4,9 +4,9 @@ using Hubtel.Interview.Assignment.UserWallet.Models;
 namespace Hubtel.Interview.Assignment.UserWallet.Extensions;
 public static class WalletExtesions
 {
-    public static WalletModelDto ToWalletDtoAsync(this WalletModel walletModel)
+    public static Task<WalletModelDto >ToWalletDtoAsync(this WalletModel walletModel)
     {
-        return new WalletModelDto
+        return Task.FromResult(new WalletModelDto
         {
             Name = walletModel.Name,
             Type = walletModel.Type.ToString(),
@@ -14,7 +14,7 @@ public static class WalletExtesions
             AccountScheme = walletModel.AccountScheme.ToString(),
             CreatedAt = walletModel.CreatedAt,
             Owner = walletModel.Owner
-        };
+        });
     }
 
     public static async Task<WalletModel> ToWalletModelAsync(this WalletModelDto walletModelDto)
@@ -31,13 +31,13 @@ public static class WalletExtesions
             });
     }
 
-    public static Task<List<WalletModelDto>> ToListOfWalletDtoAsync(this List<WalletModel> walletModels)
+    public static async Task<List<WalletModelDto>> ToListOfWalletDtoAsync(this List<WalletModel> walletModels)
     {
         var walletDtoEnumerable = new List<WalletModelDto>();
         foreach (var walletModel in walletModels)
         {
-            walletDtoEnumerable.Add(walletModel.ToWalletDtoAsync());
+            walletDtoEnumerable.Add(await walletModel.ToWalletDtoAsync());
         }
-        return Task.FromResult(walletDtoEnumerable);
+        return await Task.FromResult(walletDtoEnumerable);
     }
 }
