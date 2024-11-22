@@ -1,4 +1,3 @@
-using System.Reflection.Metadata;
 using Hubtel.Interview.Assignment.UserWallet.Dtos;
 using Hubtel.Interview.Assignment.UserWallet.Services;
 using Hubtel.Interview.Assignment.UserWallet.Types;
@@ -28,7 +27,7 @@ public class WalletController : ControllerBase
             return HandleError(result);
         
         var walletId = result.Data;
-        return Created("", walletId);
+        return CreatedAtAction(nameof(GetWalletByIdAsync),new{walletId = result.Data}, result.Data);
     }
 
     [HttpGet]
@@ -38,15 +37,38 @@ public class WalletController : ControllerBase
         var result = await _walletService.GetSingleWalletByIdAsync(walletId);
         if (!result.Success)
             return HandleError(result);
-        return null!;
+        return Ok(result.Data);
+    }
+
+    [HttpGet]
+    [Route("getAll/{ownerPhoneNumber}")]
+    public async Task<IActionResult> GetAllWalletsAsync(string ownerPhoneNumber)
+    {
+        var result = await _walletService.GetAllWalletsAsync(ownerPhoneNumber);
+        if (!result.Success)
+            return HandleError(result);
+        
+        return Ok(result.Data);
+    }
+
+    [HttpDelete]
+    [Route("delete/{walletId}")]
+    public async Task<IActionResult> RemoveWalletAsync(string walletId)
+    {
+        var result = await _walletService.RemoveWalletAsync(walletId);
+        if (!result.Success)
+            return HandleError(result);
+        
+        return Ok(new { Message = "Wallet deleted successfully." });
     }
 
 
     private IActionResult HandleError<T>(IWalletOperationResult<T> operationResult)
     {
-        if (operationResult is BadRequestWalletOperationResult<T> badRequest)
-            return BadRequest(badRequest);
-        
-        return StatusCode(StatusCodes.Status500InternalServerError);
+        return operationResult switch{
+            BadRequestWalletOperationResult<T> badRequestError => BadRequest(badRequestError.Message),
+            NotFoundWalletOperationResult<T> notFountError => NotFound(notFountError.Message),
+            _ => StatusCode(StatusCodes.Status500InternalServerError)
+        };
     }
 }
