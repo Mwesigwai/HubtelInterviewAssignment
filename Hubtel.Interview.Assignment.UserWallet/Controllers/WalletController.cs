@@ -17,6 +17,9 @@ public class WalletController : ControllerBase
 
     [HttpPost]
     [Route("create")]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status201Created)]
     public async Task<IActionResult> CreateNewWalletAsync([FromBody] WalletModelDto walletModelDto)
     {
         if (!ModelState.IsValid)
@@ -32,6 +35,10 @@ public class WalletController : ControllerBase
 
     [HttpGet]
     [Route("get/{walletId}", Name = "GetWalletByIdAsync")]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetWalletByIdAsync(string walletId)
     {
         var result = await _walletService.GetSingleWalletByIdAsync(walletId);
@@ -42,6 +49,10 @@ public class WalletController : ControllerBase
 
     [HttpGet]
     [Route("getAll/{ownerPhoneNumber}")]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetAllWalletsAsync(string ownerPhoneNumber)
     {
         var result = await _walletService.GetAllWalletsAsync(ownerPhoneNumber);
@@ -53,6 +64,10 @@ public class WalletController : ControllerBase
 
     [HttpDelete]
     [Route("delete/{walletId}")]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> RemoveWalletAsync(string walletId)
     {
         var result = await _walletService.RemoveWalletAsync(walletId);
