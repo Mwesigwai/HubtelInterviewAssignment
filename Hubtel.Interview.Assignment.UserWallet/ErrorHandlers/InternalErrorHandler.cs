@@ -5,12 +5,11 @@ public class InternalErrorHandler<T, TError>:BaseErrorHandler<T,TError>
 {
     protected override IWalletOperationResult<TError>? ProcessError(IWalletOperationResult<T> errorResult)
     {
-        if (errorResult is IWalletOperationResult<TError> badRequest)
+        if (errorResult is IWalletOperationResult<T> badRequest)
         {
             return new InternalErrorWalletOperationResult<TError>{
                 Message = badRequest.Message,
                 Success = badRequest.Success,
-                Data = badRequest.Data
             };
         }
         return null;

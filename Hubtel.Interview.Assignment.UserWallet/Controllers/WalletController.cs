@@ -27,11 +27,11 @@ public class WalletController : ControllerBase
             return HandleError(result);
         
         var walletId = result.Data;
-        return CreatedAtAction(nameof(GetWalletByIdAsync),new{walletId = result.Data}, result.Data);
+        return CreatedAtRoute("GetWalletByIdAsync", new{walletId}, new{walletId});
     }
 
     [HttpGet]
-    [Route("get/{walletId}")]
+    [Route("get/{walletId}", Name = "GetWalletByIdAsync")]
     public async Task<IActionResult> GetWalletByIdAsync(string walletId)
     {
         var result = await _walletService.GetSingleWalletByIdAsync(walletId);
@@ -59,15 +59,15 @@ public class WalletController : ControllerBase
         if (!result.Success)
             return HandleError(result);
         
-        return Ok(new { Message = "Wallet deleted successfully." });
+        return Ok("Wallet deleted successfully." );
     }
 
 
     private IActionResult HandleError<T>(IWalletOperationResult<T> operationResult)
     {
         return operationResult switch{
-            BadRequestWalletOperationResult<T> badRequestError => BadRequest(badRequestError.Message),
-            NotFoundWalletOperationResult<T> notFountError => NotFound(notFountError.Message),
+            BadRequestWalletOperationResult<T> badRequestError => BadRequest($"Error: {badRequestError.Message}"),
+            NotFoundWalletOperationResult<T> notFountError => NotFound($"Error: {notFountError.Message}"),
             _ => StatusCode(StatusCodes.Status500InternalServerError)
         };
     }

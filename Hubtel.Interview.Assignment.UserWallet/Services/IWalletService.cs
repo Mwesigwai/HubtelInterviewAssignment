@@ -5,7 +5,7 @@ namespace Hubtel.Interview.Assignment.UserWallet.Services;
 public interface IWalletService
 {
     Task<IWalletOperationResult<string>> CreateNewWalletAsync(WalletModelDto walletDto);
-    Task<IWalletOperationResult<List<WalletModelDto>>> GetAllWalletsAsync(string ownerPhoneNumber);
-    Task<IWalletOperationResult<WalletModelDto>> GetSingleWalletByIdAsync(string walletId);
+    Task<IWalletOperationResult<List<ResponseDto>>> GetAllWalletsAsync(string ownerPhoneNumber);
+    Task<IWalletOperationResult<ResponseDto>> GetSingleWalletByIdAsync(string walletId);
     Task<IWalletOperationResult<bool>> RemoveWalletAsync(string walletId);
 }

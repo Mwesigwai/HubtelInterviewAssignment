@@ -5,12 +5,11 @@ public class NotFoundErrorHandler<T, TError>:BaseErrorHandler<T,TError>
 {
     protected override IWalletOperationResult<TError>? ProcessError(IWalletOperationResult<T> errorResult)
     {
-        if (errorResult is NotFoundWalletOperationResult<TError> badRequest)
+        if (errorResult is NotFoundWalletOperationResult<T> notFound)
         {
             return new NotFoundWalletOperationResult<TError>{
-                Message = badRequest.Message,
-                Success = badRequest.Success,
-                Data = badRequest.Data
+                Message = notFound.Message,
+                Success = notFound.Success,
             };
         }
         return null;

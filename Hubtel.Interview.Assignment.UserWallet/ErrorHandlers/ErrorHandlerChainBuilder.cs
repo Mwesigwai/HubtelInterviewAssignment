@@ -1,7 +1,7 @@
 namespace Hubtel.Interview.Assignment.UserWallet.ErrorHandlers;
-public class ErrorHandlerChainBuilder<TInput, TOutput> : IErrorHandlerChainBuilder<TInput, TOutput>
+public class ErrorHandlerChainBuilder<TInput, TOutput>
 {
-    public IErrorHandler<TInput, TOutput> BuildErrorHandlerChain()
+    public static IErrorHandler<TInput, TOutput> BuildErrorHandlerChain()
     {
         var badRequestHandler = new BadRequestErrorHandler<TInput, TOutput>();
         var notFoundErrorHandler = new NotFoundErrorHandler<TInput, TOutput>();

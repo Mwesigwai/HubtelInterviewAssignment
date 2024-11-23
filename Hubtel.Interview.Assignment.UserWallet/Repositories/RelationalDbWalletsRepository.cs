@@ -1,4 +1,5 @@
 using Hubtel.Interview.Assignment.UserWallet.Data;
+using Hubtel.Interview.Assignment.UserWallet.Dtos;
 using Hubtel.Interview.Assignment.UserWallet.Models;
 using Hubtel.Interview.Assignment.UserWallet.Types;
 using Microsoft.EntityFrameworkCore;
@@ -45,7 +46,6 @@ public class RelationalDbWalletsRepository : IRelationaDbWalletsRepository
         }
     }
 
-
     public async Task<IWalletOperationResult<List<WalletModel>>> GetAllWalletsAsync(string ownerPhoneNumber)
     {
         try
@@ -82,7 +82,6 @@ public class RelationalDbWalletsRepository : IRelationaDbWalletsRepository
         }
     }
 
-
     public async Task<IWalletOperationResult<WalletModel?>> GetSingleWalletByIdAsync(string walletId)
     {
         try
@@ -117,6 +116,36 @@ public class RelationalDbWalletsRepository : IRelationaDbWalletsRepository
                 Data = null
             };
         }
+    }
+
+    public async Task<IWalletOperationResult<WalletModel?>> GetWalletByNameAndAccountNumberAsync(string owner, string accountNumner, string accountName)
+    {
+        try
+        {
+            var wallet = await _dbContext.Wallets
+            .Where(wallet => wallet.Owner == owner)
+            .FirstOrDefaultAsync(
+                wallet => wallet.AccountNumber == accountNumner || wallet.Name == accountName
+            );
+            return new SuccessWalletOperationResult<WalletModel?>{
+                Data = wallet,
+                Message = "Success",
+                Success = true
+            };
+        }
+        catch (Exception ex)
+        {
+            return new InternalErrorWalletOperationResult<WalletModel?>{
+                Message = $"An error occurred while removing the wallet: {ex.Message}",
+                Data = null,
+                Success = false
+            };
+        }
+    }
+
+    public async Task<int> GetWalletCountAsync(string ownerPhoneNumber)
+    {
+        return await _dbContext.Wallets.CountAsync();
     }
 
     public async Task<IWalletOperationResult<bool>> RemoveWalletAsync(string walletId)

@@ -1,26 +1,16 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace Hubtel.Interview.Assignment.UserWallet.Dtos;
-public class WalletModelDto
+public class ResponseDto
 {
-    [Required]
+    public string Id {get; set;}=string.Empty;
     public string Name { get; set; } = string.Empty;
 
-    [Required]
     public string Type { get; set; } = string.Empty;
 
-    [Required]
-    [MinLength(10)]
     public string AccountNumber { get; set; } = string.Empty;
 
-    [Required]
     public string AccountScheme { get; set; } = string.Empty;
     
-    [DataType(DataType.DateTime), Required]
     public DateTime CreatedAt { get; set; }
     
-    [Required]
-    [MinLength(10)]
-    [DataType(DataType.PhoneNumber)]
     public string Owner { get; set; } = string.Empty;
 }
