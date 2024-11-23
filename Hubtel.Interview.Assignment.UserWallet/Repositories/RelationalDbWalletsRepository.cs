@@ -1,5 +1,4 @@
 using Hubtel.Interview.Assignment.UserWallet.Data;
-using Hubtel.Interview.Assignment.UserWallet.Dtos;
 using Hubtel.Interview.Assignment.UserWallet.Models;
 using Hubtel.Interview.Assignment.UserWallet.Types;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +15,6 @@ public class RelationalDbWalletsRepository : IRelationaDbWalletsRepository
 
     public async Task<IWalletOperationResult<string>> CreateNewWalletAsync(WalletModel walletModel)
     {
-        //later, will create an extension method for checking if the model is valid
         try
         {
             if (walletModel is null)

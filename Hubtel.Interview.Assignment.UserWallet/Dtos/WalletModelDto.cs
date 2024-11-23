@@ -21,6 +21,7 @@ public class WalletModelDto
     
     [Required]
     [MinLength(10)]
+    [RegularExpression(@"^\+?[0-9]\d{1,14}$", ErrorMessage = "Invalid phone number. Only digits and an optional leading + or 0 are allowed.")]
     [DataType(DataType.PhoneNumber)]
     public string Owner { get; set; } = string.Empty;
 }

@@ -26,7 +26,7 @@ public class WalletController : ControllerBase
            return BadRequest(ModelState);
 
         var result = await _walletService.CreateNewWalletAsync(walletModelDto);
-        if (!result.Success)
+        if (result is not SuccessWalletOperationResult<string>)
             return HandleError(result);
         
         var walletId = result.Data;
@@ -42,7 +42,7 @@ public class WalletController : ControllerBase
     public async Task<IActionResult> GetWalletByIdAsync(string walletId)
     {
         var result = await _walletService.GetSingleWalletByIdAsync(walletId);
-        if (!result.Success)
+        if (result is not SuccessWalletOperationResult<ResponseDto>)
             return HandleError(result);
         return Ok(result.Data);
     }
@@ -56,7 +56,7 @@ public class WalletController : ControllerBase
     public async Task<IActionResult> GetAllWalletsAsync(string ownerPhoneNumber)
     {
         var result = await _walletService.GetAllWalletsAsync(ownerPhoneNumber);
-        if (!result.Success)
+        if (result is not SuccessWalletOperationResult<List<ResponseDto>>)
             return HandleError(result);
         
         return Ok(result.Data);
@@ -71,7 +71,7 @@ public class WalletController : ControllerBase
     public async Task<IActionResult> RemoveWalletAsync(string walletId)
     {
         var result = await _walletService.RemoveWalletAsync(walletId);
-        if (!result.Success)
+        if (result is not SuccessWalletOperationResult<bool>)
             return HandleError(result);
         
         return Ok("Wallet deleted successfully." );

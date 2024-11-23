@@ -44,7 +44,7 @@ public class WalletService : IWalletService
             }
             return await TryCreateWallet(walletDto);
         }
-        catch (Exception)
+        catch (Exception ex)
         {
             return new InternalErrorWalletOperationResult<string>{
                 Message = "An internal error occured while processing.",
