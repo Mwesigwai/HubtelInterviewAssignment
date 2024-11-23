@@ -1,13 +1,13 @@
 using Hubtel.Interview.Assignment.UserWallet.Types;
 
 namespace Hubtel.Interview.Assignment.UserWallet.ErrorHandlers;
-public class NotFoundErrorHandler<T, TError>:BaseErrorHandler<T,TError>
+public class NotFoundErrorHandler<TInput, TOutput>:BaseErrorHandler<TInput,TOutput>
 {
-    protected override IWalletOperationResult<TError>? ProcessError(IWalletOperationResult<T> errorResult)
+    protected override IWalletOperationResult<TOutput>? ProcessError(IWalletOperationResult<TInput> errorResult)
     {
-        if (errorResult is NotFoundWalletOperationResult<T> notFound)
+        if (errorResult is NotFoundWalletOperationResult<TInput> notFound)
         {
-            return new NotFoundWalletOperationResult<TError>{
+            return new NotFoundWalletOperationResult<TOutput>{
                 Message = notFound.Message,
                 Success = notFound.Success,
             };
