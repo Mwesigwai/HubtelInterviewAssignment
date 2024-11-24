@@ -1,6 +1,7 @@
 using Hubtel.Interview.Assignment.UserWallet.Data;
 using Hubtel.Interview.Assignment.UserWallet.Models;
 using Hubtel.Interview.Assignment.UserWallet.Repositories;
+using Hubtel.Interview.Assignment.UserWallet.Types;
 using Microsoft.EntityFrameworkCore;
 using MockQueryable;
 using MockQueryable.Moq;
@@ -39,15 +40,18 @@ public class WalletRepositoryTests
     public async Task GetSingleWalletByIdAsync_returns_Correct_SingleWallet_For_Id_Given()
     {
         var testId = "testId_1";
-        var wallet = await _walletsRepository.GetSingleWalletByIdAsync(testId);
-        Assert.IsNotType<List<WalletModel>>(wallet?.Data);
-        Assert.Equal(testId, wallet?.Data?.Id);
+        var repositoryResponse = await _walletsRepository.GetSingleWalletByIdAsync(testId);
+        Assert.IsNotType<List<WalletModel>>(repositoryResponse?.Data);
+        Assert.Equal(testId, repositoryResponse?.Data?.Id);
     }
 
     [Fact]
     public async Task GetSingleWalletByIdAsync_returns_NotFoundResponse_When_Wallet_With_Provided_Id_DoesNotExist()
     {
-        
-    }
+        var invalidId = "invalid id";
+        var repositoryResponse = await _walletsRepository.GetSingleWalletByIdAsync(invalidId);
 
+        Assert.False(repositoryResponse.Success);
+        Assert.IsType<NotFoundWalletOperationResult<WalletModel>>(repositoryResponse);
+    }
 }
