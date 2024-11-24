@@ -125,6 +125,7 @@ public class RelationalDbWalletsRepository : IRelationaDbWalletsRepository
             .FirstOrDefaultAsync(
                 wallet => wallet.AccountNumber == accountNumner || wallet.Name == accountName
             );
+            
             return new SuccessWalletOperationResult<WalletModel?>{
                 Data = wallet,
                 Message = "Success",

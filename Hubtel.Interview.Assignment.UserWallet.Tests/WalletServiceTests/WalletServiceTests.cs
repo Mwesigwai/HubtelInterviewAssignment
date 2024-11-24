@@ -40,6 +40,7 @@ public class WalletServiceTests
         var result = await _walletService.CreateNewWalletAsync(walletDto);
 
         Assert.True(result is SuccessWalletOperationResult<string>);
+        Assert.IsType<string>(result.Data);
         Assert.NotNull(result.Data!);
     }
 
@@ -67,6 +68,8 @@ public class WalletServiceTests
 
         Assert.True(result.Success);
         Assert.NotNull(result.Data);
+        Assert.NotEmpty(result.Data);
+        Assert.IsType<List<ResponseDto>>(result.Data);
     }
 
     [Fact]
@@ -78,9 +81,10 @@ public class WalletServiceTests
         );
 
         var result = await _walletService.GetSingleWalletByIdAsync("walletId");
-
-        Assert.True(result.Success);
+        
         Assert.NotNull(result.Data);
+        Assert.True(result.Success);
+        Assert.IsType<ResponseDto>(result.Data);
     }
 
     [Fact]

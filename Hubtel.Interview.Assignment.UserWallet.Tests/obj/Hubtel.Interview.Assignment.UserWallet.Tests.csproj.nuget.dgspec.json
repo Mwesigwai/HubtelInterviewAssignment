@@ -60,6 +60,10 @@
               "target": "Package",
               "version": "[17.8.0, )"
             },
+            "MockQueryable.Moq": {
+              "target": "Package",
+              "version": "[7.0.3, )"
+            },
             "Moq": {
               "target": "Package",
               "version": "[4.20.72, )"
