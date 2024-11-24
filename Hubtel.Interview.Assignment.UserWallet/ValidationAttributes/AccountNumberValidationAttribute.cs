@@ -16,7 +16,7 @@ public class AccountNumberValidationAttribute : ValidationAttribute
 
         if (type.Equals("momo", StringComparison.OrdinalIgnoreCase))
         {
-            var phoneNumberPattern = @"^\+?[1-9]\d{1,14}$"; 
+            var phoneNumberPattern = @"^\+?[0-9]\d{1,14}$"; 
             if (!Regex.IsMatch(accountNumber, phoneNumberPattern))
             {
                 return new ValidationResult("For momo type, the account number should be a valid phone number.");
