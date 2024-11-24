@@ -143,7 +143,9 @@ public class RelationalDbWalletsRepository : IRelationaDbWalletsRepository
 
     public async Task<int> GetWalletCountAsync(string ownerPhoneNumber)
     {
-        return await _dbContext.Wallets.CountAsync();
+        return await _dbContext.Wallets
+        .Where(wallet => wallet.Owner == ownerPhoneNumber)
+        .CountAsync();
     }
 
     public async Task<IWalletOperationResult<bool>> RemoveWalletAsync(string walletId)

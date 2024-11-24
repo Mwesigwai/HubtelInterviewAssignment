@@ -12,7 +12,7 @@ public class WalletModelDto
 
     [Required]
     [MinLength(8)]
-    [MaxLength(12)]
+    [MaxLength(13)]
     [AccountNumberValidation]
     public string AccountNumber { get; set; } = string.Empty;
 
