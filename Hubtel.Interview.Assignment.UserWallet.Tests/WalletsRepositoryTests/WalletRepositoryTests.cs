@@ -41,7 +41,10 @@ public class WalletRepositoryTests
     {
         var testId = "testId_1";
         var repositoryResponse = await _walletsRepository.GetSingleWalletByIdAsync(testId);
+        Assert.NotNull(repositoryResponse);
+        Assert.IsType<SuccessWalletOperationResult<WalletModel>>(repositoryResponse);
         Assert.IsNotType<List<WalletModel>>(repositoryResponse?.Data);
+        Assert.NotNull(repositoryResponse);
         Assert.Equal(testId, repositoryResponse?.Data?.Id);
     }
 
