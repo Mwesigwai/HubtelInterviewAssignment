@@ -57,4 +57,13 @@ public class WalletRepositoryTests
         Assert.False(repositoryResponse.Success);
         Assert.IsType<NotFoundWalletOperationResult<WalletModel>>(repositoryResponse);
     }
+
+    [Fact]
+    public async Task CreateNewWalletAsync_Does_Not_Create_Wallet_If_Wallet_Given_Is_Null()
+    {
+        WalletModel? nullWallet = null;
+        var repositoryResponse = await _walletsRepository.CreateNewWalletAsync(nullWallet!);
+        Assert.IsType<BadRequestWalletOperationResult<string>>(repositoryResponse);
+        Assert.Null(repositoryResponse.Data);
+    }
 }
