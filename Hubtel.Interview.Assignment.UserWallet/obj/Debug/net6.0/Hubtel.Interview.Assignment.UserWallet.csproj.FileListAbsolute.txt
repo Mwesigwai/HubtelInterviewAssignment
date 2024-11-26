@@ -80,3 +80,6 @@ C:/Users/IsaacMwesigwa/hubtelAssignment/HubtelInterviewAssignment/Hubtel.Intervi
 C:/Users/IsaacMwesigwa/hubtelAssignment/HubtelInterviewAssignment/Hubtel.Interview.Assignment.UserWallet/obj/Debug/net6.0/Hubtel.Interview.Assignment.UserWallet.genruntimeconfig.cache
 C:/Users/IsaacMwesigwa/hubtelAssignment/HubtelInterviewAssignment/Hubtel.Interview.Assignment.UserWallet/obj/Debug/net6.0/ref/Hubtel.Interview.Assignment.UserWallet.dll
 /Users/isaacmwesigwa/Desktop/HubtelInterviewAssignment/Hubtel.Interview.Assignment.UserWallet/obj/Debug/net6.0/Hubtel.Interview.Assignment.UserWallet.sourcelink.json
+/Users/isaacmwesigwa/Desktop/HubtelInterviewAssignment/Hubtel.Interview.Assignment.UserWallet/bin/Debug/net6.0/Hubtel.Interview.Assignment.UserWallet.xml
+/Users/isaacmwesigwa/Desktop/HubtelInterviewAssignment/Hubtel.Interview.Assignment.UserWallet/obj/Debug/net6.0/Hubtel.Interview.Assignment.UserWallet.xml
+/Users/isaacmwesigwa/Desktop/HubtelInterviewAssignment/Hubtel.Interview.Assignment.UserWallet/bin/Debug/net6.0/PhoneNumbers.dll

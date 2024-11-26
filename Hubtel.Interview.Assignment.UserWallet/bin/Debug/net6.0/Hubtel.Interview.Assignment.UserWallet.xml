@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Hubtel.Interview.Assignment.UserWallet</name>
+    </assembly>
+    <members>
+        <member name="M:Hubtel.Interview.Assignment.UserWallet.Controllers.WalletController.CreateNewWalletAsync(Hubtel.Interview.Assignment.UserWallet.Dtos.WalletModelDto)">
+             <summary>
+                 This creates a new wallet for the user.
+             </summary>
+             <remarks>
+                 Here, you create a new wallet.\
+                 All the properties for creating a valid wallet object are required.\
+                 Here is a sample object.
+                 
+                 {\
+                     "Name" : "Test wallet",\
+                     "Type" : "momo",\
+                     "AccountNumber" : "0782673654",\
+                     "AccountScheme" : "mtn",\
+                     "CreatedAt" : "2024-11-26T14:01:25.203Z",\
+                     "Owner" : "0782576847"\
+                 }
+              
+                 The following are the valid values for Account Scheme; visa, mastercard, aireteltigo, vodafone  and mtn. \
+                 The following are the valid values for Type; momo, card.
+                 
+                 The following will result into a bad request response.
+                 
+                 Account scheme provided is not any of the above schemes\
+                 Wallet Type provided is not any of the above types,\
+                 Account scheme does not match with the account type ie specified wallet Type as momo and provide a scheme of visa\
+                 You are trying to create a duplicate wallet\
+                 you are trying to create more than five wallets
+                 
+                 This method also returns an internal server error if something went wrong on the server side. So you may try again\
+                 If all goes well, an id for the wallet created is returned with a server status of Created.
+            
+             </remarks>
+             <param name="walletModelDto"></param>
+             <returns></returns>
+        </member>
+    </members>
+</doc>
