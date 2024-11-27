@@ -412,3 +412,5 @@
 /Users/isaacmwesigwa/Desktop/HubtelInterviewAssignment/Hubtel.Interview.Assignment.UserWallet.Tests/bin/Debug/net6.0/MockQueryable.Core.dll
 /Users/isaacmwesigwa/Desktop/HubtelInterviewAssignment/Hubtel.Interview.Assignment.UserWallet.Tests/bin/Debug/net6.0/MockQueryable.EntityFrameworkCore.dll
 /Users/isaacmwesigwa/Desktop/HubtelInterviewAssignment/Hubtel.Interview.Assignment.UserWallet.Tests/bin/Debug/net6.0/MockQueryable.Moq.dll
+/Users/isaacmwesigwa/Desktop/HubtelInterviewAssignment/Hubtel.Interview.Assignment.UserWallet.Tests/bin/Debug/net6.0/PhoneNumbers.dll
+/Users/isaacmwesigwa/Desktop/HubtelInterviewAssignment/Hubtel.Interview.Assignment.UserWallet.Tests/bin/Debug/net6.0/Hubtel.Interview.Assignment.UserWallet.xml

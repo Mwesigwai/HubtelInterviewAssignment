@@ -19,7 +19,6 @@ public class WalletController : ControllerBase
     ///     This creates a new wallet for the user.
     /// </summary>
     /// <remarks>
-    ///     Here, you create a new wallet.\
     ///     All the properties for creating a valid wallet object are required.\
     ///     Here is a sample object.
     ///     
@@ -31,7 +30,8 @@ public class WalletController : ControllerBase
     ///         "CreatedAt" : "2024-11-26T14:01:25.203Z",\
     ///         "Owner" : "0782576847"\
     ///     }
-    ///  
+    ///     
+    ///     Owner should be a valid phone number\
     ///     The following are the valid values for Account Scheme [visa, mastercard, aireteltigo, vodafone, mtn]. \
     ///     The following are the valid values for Type [momo, card].
     ///     

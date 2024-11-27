@@ -172,7 +172,7 @@
           "System.Buffers.Reference": "6.0.0.0",
           "System.Collections.Concurrent.Reference": "6.0.0.0",
           "System.Collections.Reference": "6.0.0.0",
-          "System.Collections.Immutable": "6.0.0.0",
+          "System.Collections.Immutable.Reference": "6.0.0.0",
           "System.Collections.NonGeneric": "6.0.0.0",
           "System.Collections.Specialized": "6.0.0.0",
           "System.ComponentModel.Annotations": "6.0.0.0",
@@ -376,6 +376,21 @@
         }
       },
       "coverlet.collector/6.0.0": {},
+      "libphonenumber-csharp/8.13.50": {
+        "dependencies": {
+          "System.Collections.Immutable": "1.7.1",
+          "System.IO.Compression": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/PhoneNumbers.dll": {
+            "assemblyVersion": "8.13.50.0",
+            "fileVersion": "8.13.50.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/PhoneNumbers.dll": {}
+        }
+      },
       "Microsoft.AspNetCore.Authentication.Abstractions/2.2.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Http.Abstractions": "2.2.0",
@@ -1411,6 +1426,7 @@
           "System.Threading.Tasks": "4.3.0"
         }
       },
+      "System.Collections.Immutable/1.7.1": {},
       "System.Console/4.3.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.0",
@@ -2015,7 +2031,8 @@
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "6.0.0",
           "Microsoft.EntityFrameworkCore": "7.0.0",
           "Microsoft.EntityFrameworkCore.InMemory": "6.0.0",
-          "Swashbuckle.AspNetCore": "6.5.0"
+          "Swashbuckle.AspNetCore": "6.5.0",
+          "libphonenumber-csharp": "8.13.50"
         },
         "runtime": {
           "Hubtel.Interview.Assignment.UserWallet.dll": {}
@@ -2798,7 +2815,7 @@
         },
         "compileOnly": true
       },
-      "System.Collections.Immutable/6.0.0.0": {
+      "System.Collections.Immutable.Reference/6.0.0.0": {
         "compile": {
           "System.Collections.Immutable.dll": {}
         },
@@ -3740,6 +3757,13 @@
       "path": "coverlet.collector/6.0.0",
       "hashPath": "coverlet.collector.6.0.0.nupkg.sha512"
     },
+    "libphonenumber-csharp/8.13.50": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-FcQDy8oPVMHu27gILOkEFMWjf7gTwVb5xU6OSfGP0HcZUdICw2eGtghhqEnu6uF0P+7cqeH51HUu+7ewocouBQ==",
+      "path": "libphonenumber-csharp/8.13.50",
+      "hashPath": "libphonenumber-csharp.8.13.50.nupkg.sha512"
+    },
     "Microsoft.AspNetCore.Authentication.Abstractions/2.2.0": {
       "type": "package",
       "serviceable": true,
@@ -4390,6 +4414,13 @@
       "sha512": "sha512-ztl69Xp0Y/UXCL+3v3tEU+lIy+bvjKNUmopn1wep/a291pVPK7dxBd6T7WnlQqRog+d1a/hSsgRsmFnIBKTPLQ==",
       "path": "system.collections.concurrent/4.3.0",
       "hashPath": "system.collections.concurrent.4.3.0.nupkg.sha512"
+    },
+    "System.Collections.Immutable/1.7.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-B43Zsz5EfMwyEbnObwRxW5u85fzJma3lrDeGcSAV1qkhSRTNY5uXAByTn9h9ddNdhM+4/YoLc/CI43umjwIl9Q==",
+      "path": "system.collections.immutable/1.7.1",
+      "hashPath": "system.collections.immutable.1.7.1.nupkg.sha512"
     },
     "System.Console/4.3.0": {
       "type": "package",
@@ -5489,7 +5520,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "System.Collections.Immutable/6.0.0.0": {
+    "System.Collections.Immutable.Reference/6.0.0.0": {
       "type": "referenceassembly",
       "serviceable": false,
       "sha512": ""
