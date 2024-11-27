@@ -21,7 +21,7 @@ public class AccountNumberValidationAttribute : ValidationAttribute
     
         else if (type.Equals("card", StringComparison.OrdinalIgnoreCase))
         {
-            var accountNumberRegex = @"^\d{8-12}$";
+            var accountNumberRegex = @"^\d{8,12}$";
             if (!Regex.IsMatch(accountNumber, accountNumberRegex))
             {
                 return new ValidationResult("For card type, the account number should be a valid 8 or 12 digit account number");

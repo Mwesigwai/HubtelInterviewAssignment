@@ -8,7 +8,7 @@ public class PhoneNumberValidatorHelper
         var phoneNumberUtil = PhoneNumberUtil.GetInstance();
         try
         {
-            var parsedNumber = phoneNumberUtil.Parse(phoneNumber, null);
+            var parsedNumber = phoneNumberUtil.Parse(phoneNumber, "UG");
             var regionCode = phoneNumberUtil.GetRegionCodeForNumber(parsedNumber);
             Console.WriteLine(regionCode);
             return phoneNumberUtil.IsValidNumber(parsedNumber);

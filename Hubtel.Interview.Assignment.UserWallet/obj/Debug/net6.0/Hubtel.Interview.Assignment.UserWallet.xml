@@ -22,8 +22,8 @@
                      "Owner" : "0782576847"\
                  }
               
-                 The following are the valid values for Account Scheme; visa, mastercard, aireteltigo, vodafone  and mtn. \
-                 The following are the valid values for Type; momo, card.
+                 The following are the valid values for Account Scheme [visa, mastercard, aireteltigo, vodafone, mtn]. \
+                 The following are the valid values for Type [momo, card].
                  
                  The following will result into a bad request response.
                  
