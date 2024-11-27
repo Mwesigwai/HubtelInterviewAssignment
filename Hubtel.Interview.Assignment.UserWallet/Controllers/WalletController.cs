@@ -44,11 +44,12 @@ public class WalletController : ControllerBase
     ///     you are trying to create more than five wallets
     ///     
     ///     This method also returns an internal server error if something went wrong on the server side. So you may try again\
-    ///     If all goes well, an id for the wallet created is returned with a server status of Created.
+    ///     If all goes well, an id for the wallet created is returned with a server status of Created.\
+    ///     For quick reference, it is better to store the id for future actions like deleting or getting it.
     ///
     /// </remarks>
     /// <param name="walletModelDto"></param>
-    /// <returns></returns>
+    /// <returns>The id of the newly created wallet</returns>
     [HttpPost]
     [Route("create")]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -67,6 +68,16 @@ public class WalletController : ControllerBase
         return CreatedAtRoute("GetWalletByIdAsync", new{walletId}, new{walletId});
     }
 
+    /// <summary>
+    ///     You can use this to get a single wallet using a wallet id
+    /// </summary>
+    /// <remarks>
+    ///     A wallet id is required to get a wallet from the server\
+    ///     If a wallet with the wallet id provided was not found, you recieve not found response.\
+    ///     An internal servier error may be returned if something went wrong on the server side, you can still try again
+    /// </remarks>
+    /// <param name="walletId"></param>
+    /// <returns>An object of the wallet with the provided id</returns>
     [HttpGet]
     [Route("get/{walletId}", Name = "GetWalletByIdAsync")]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -81,6 +92,16 @@ public class WalletController : ControllerBase
         return Ok(result.Data);
     }
 
+    /// <summary>
+    /// This fetches all wallets for a single owner.
+    /// </summary>
+    /// <remarks>
+    ///     A phone number for the owner is required to identify whose wallets to return.\
+    ///     A not found response could be returned if the phone number provided is not associated with any stored wallet.\
+    ///     An internal server error could be returned if something goes wrong on the server side.
+    /// </remarks>
+    /// <param name="ownerPhoneNumber"></param>
+    /// <returns>A list of wallets related to the provided phone  number</returns>
     [HttpGet]
     [Route("getAll/{ownerPhoneNumber}")]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -96,6 +117,18 @@ public class WalletController : ControllerBase
         return Ok(result.Data);
     }
 
+    /// <summary>
+    /// This deletes a wallets.
+    /// </summary>
+    /// <remarks>
+    ///     The wallet associated with the provided id will be permanently deleted.\
+    ///     A wallet id is got at the time of creating a wallet. \
+    ///     After creating a wallet, it is best to store that id for future use.\
+    ///     However, if you get all wallets with the owner's phone number, you can be able to obtain the ids.\
+    ///     If no wallet was found with the provided id, a not found response is returned.\
+    /// </remarks>
+    /// <param name="walletId"></param>
+    /// <returns></returns>
     [HttpDelete]
     [Route("delete/{walletId}")]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
