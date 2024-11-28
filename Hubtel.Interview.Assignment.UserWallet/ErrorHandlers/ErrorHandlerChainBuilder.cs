@@ -3,7 +3,7 @@ namespace Hubtel.Interview.Assignment.UserWallet.ErrorHandlers;
 /// <summary>
 /// Builds a chain of error handlers that call each other untill the error is handled by the right handler.
 /// The BuildErrorHandlerChain returns an error handler linked to other handlers through the SetNext Method.
-/// Its like a chain or repsonsibility.
+/// Its like a chain of repsonsibility.
 /// </summary>
 /// <typeparam name="TInput"></typeparam>
 /// <typeparam name="TOutput"></typeparam>
