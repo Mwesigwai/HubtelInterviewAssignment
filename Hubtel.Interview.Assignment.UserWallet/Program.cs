@@ -1,4 +1,3 @@
-using AutoMapper;
 using Hubtel.Interview.Assignment.UserWallet.Data;
 using Hubtel.Interview.Assignment.UserWallet.Dtos;
 using Hubtel.Interview.Assignment.UserWallet.ErrorHandlers;
