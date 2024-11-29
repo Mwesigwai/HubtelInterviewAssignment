@@ -12,7 +12,6 @@ public static class WalletExtesions
             Type = walletModel.Type.ToString(),
             AccountNumber = walletModel.AccountNumber,
             AccountScheme = walletModel.AccountScheme.ToString(),
-            CreatedAt = walletModel.CreatedAt,
             Owner = walletModel.Owner
         });
     }
@@ -40,7 +39,6 @@ public static class WalletExtesions
                 Type = (Enums.WalletType)Enum.Parse(typeof(Enums.WalletType), walletModelDto.Type, true),
                 AccountNumber = walletModelDto.AccountNumber[..6],
                 AccountScheme = (Enums.WalletAccountScheme)Enum.Parse(typeof(Enums.WalletAccountScheme), walletModelDto.AccountScheme, true),
-                CreatedAt = walletModelDto.CreatedAt,
                 Owner = walletModelDto.Owner
             });
     }

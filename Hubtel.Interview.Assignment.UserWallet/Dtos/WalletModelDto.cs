@@ -21,10 +21,6 @@ public class WalletModelDto
     public string AccountScheme { get; set; } = string.Empty;
     
     [Required]
-    [DataType(DataType.DateTime)]
-    public DateTime CreatedAt { get; set; }
-    
-    [Required]
     [AccountOwnerPhoneNumberValidation]
     [DataType(DataType.PhoneNumber)]
     public string Owner { get; set; } = string.Empty;

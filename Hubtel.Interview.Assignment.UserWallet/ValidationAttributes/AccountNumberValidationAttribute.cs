@@ -17,7 +17,7 @@ public class AccountNumberValidationAttribute : ValidationAttribute
         if (type.Equals("momo", StringComparison.OrdinalIgnoreCase))
         {
             if (!PhoneNumberValidator.IsValidPhoneNumber(accountNumber))
-                return new ValidationResult("invalid account phone number");
+                return new ValidationResult("Invalid account phone number.");
         }
     
         else if (type.Equals("card", StringComparison.OrdinalIgnoreCase))

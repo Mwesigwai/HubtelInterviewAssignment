@@ -20,7 +20,7 @@ public class WalletModel
     public WalletAccountScheme AccountScheme { get; set; }
     
     [DataType(DataType.DateTime), Required]
-    public DateTime CreatedAt { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
     
     [DataType(DataType.PhoneNumber), Required]
     public string Owner { get; set; } = string.Empty;

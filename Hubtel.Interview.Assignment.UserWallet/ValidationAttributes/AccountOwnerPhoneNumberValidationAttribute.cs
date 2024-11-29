@@ -14,7 +14,7 @@ public class AccountOwnerPhoneNumberValidationAttribute : ValidationAttribute
 
         if (!PhoneNumberValidator.IsValidPhoneNumber(accountNumber))
         {
-            return new ValidationResult("Invalid account owner's phone number");
+            return new ValidationResult("Invalid account owner's phone number. Owner should be a valid phone number");
         }
 
         return ValidationResult.Success!;
