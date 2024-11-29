@@ -2,6 +2,8 @@ using System.ComponentModel.DataAnnotations;
 using Hubtel.Interview.Assignment.UserWallet.Dtos;
 
 namespace Hubtel.Interview.Assignment.UserWallet.ValidationAttributes;
+
+[AttributeUsage(AttributeTargets.Property)]
 public class AccountSchemeValidationAttribute : ValidationAttribute
 {
     protected override ValidationResult IsValid(object? value, ValidationContext validationContext)

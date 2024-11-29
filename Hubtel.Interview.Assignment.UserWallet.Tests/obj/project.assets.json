@@ -8641,39 +8641,32 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\IsaacMwesigwa\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "/home/isaac/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\IsaacMwesigwa\\Desktop\\HubtelUserWalletInterviewAssignment\\HubtelInterviewAssignment\\Hubtel.Interview.Assignment.UserWallet.Tests\\Hubtel.Interview.Assignment.UserWallet.Tests.csproj",
+      "projectUniqueName": "/home/isaac/Desktop/HubtelInterviewAssignment/HubtelInterviewAssignment/Hubtel.Interview.Assignment.UserWallet.Tests/Hubtel.Interview.Assignment.UserWallet.Tests.csproj",
       "projectName": "Hubtel.Interview.Assignment.UserWallet.Tests",
-      "projectPath": "C:\\Users\\IsaacMwesigwa\\Desktop\\HubtelUserWalletInterviewAssignment\\HubtelInterviewAssignment\\Hubtel.Interview.Assignment.UserWallet.Tests\\Hubtel.Interview.Assignment.UserWallet.Tests.csproj",
-      "packagesPath": "C:\\Users\\IsaacMwesigwa\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\IsaacMwesigwa\\Desktop\\HubtelUserWalletInterviewAssignment\\HubtelInterviewAssignment\\Hubtel.Interview.Assignment.UserWallet.Tests\\obj\\",
+      "projectPath": "/home/isaac/Desktop/HubtelInterviewAssignment/HubtelInterviewAssignment/Hubtel.Interview.Assignment.UserWallet.Tests/Hubtel.Interview.Assignment.UserWallet.Tests.csproj",
+      "packagesPath": "/home/isaac/.nuget/packages/",
+      "outputPath": "/home/isaac/Desktop/HubtelInterviewAssignment/HubtelInterviewAssignment/Hubtel.Interview.Assignment.UserWallet.Tests/obj/",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\IsaacMwesigwa\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/home/isaac/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\IsaacMwesigwa\\Desktop\\HubtelUserWalletInterviewAssignment\\HubtelInterviewAssignment\\Hubtel.Interview.Assignment.UserWallet\\Hubtel.Interview.Assignment.UserWallet.csproj": {
-              "projectPath": "C:\\Users\\IsaacMwesigwa\\Desktop\\HubtelUserWalletInterviewAssignment\\HubtelInterviewAssignment\\Hubtel.Interview.Assignment.UserWallet\\Hubtel.Interview.Assignment.UserWallet.csproj"
+            "/home/isaac/Desktop/HubtelInterviewAssignment/HubtelInterviewAssignment/Hubtel.Interview.Assignment.UserWallet/Hubtel.Interview.Assignment.UserWallet.csproj": {
+              "projectPath": "/home/isaac/Desktop/HubtelInterviewAssignment/HubtelInterviewAssignment/Hubtel.Interview.Assignment.UserWallet/Hubtel.Interview.Assignment.UserWallet.csproj"
             }
           }
         }
@@ -8737,12 +8730,22 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[6.0.31, 6.0.31]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[6.0.31, 6.0.31]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/home/isaac/.dotnet/sdk/8.0.302/RuntimeIdentifierGraph.json"
       }
     }
   }

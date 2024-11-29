@@ -1,10 +1,11 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 using Hubtel.Interview.Assignment.UserWallet.Dtos;
-using Hubtel.Interview.Assignment.UserWallet.HelperMethods;
+using Hubtel.Interview.Assignment.UserWallet.Validators;
 
 namespace Hubtel.Interview.Assignment.UserWallet.ValidationAttributes;
 
+[AttributeUsage(AttributeTargets.Property)]
 public class AccountNumberValidationAttribute : ValidationAttribute
 {
     protected override ValidationResult IsValid(object? value, ValidationContext validationContext)
@@ -15,16 +16,16 @@ public class AccountNumberValidationAttribute : ValidationAttribute
 
         if (type.Equals("momo", StringComparison.OrdinalIgnoreCase))
         {
-            if (!PhoneNumberValidatorHelper.IsValidPhoneNumber(accountNumber))
+            if (!PhoneNumberValidator.IsValidPhoneNumber(accountNumber))
                 return new ValidationResult("invalid account phone number");
         }
     
         else if (type.Equals("card", StringComparison.OrdinalIgnoreCase))
         {
-            var accountNumberRegex = @"^\d{8,12}$";
-            if (!Regex.IsMatch(accountNumber, accountNumberRegex))
+            var (isValid, errorMessage) = AccountNumberValidator.IsValid(accountNumber);
+            if (!isValid)
             {
-                return new ValidationResult("For card type, the account number should be a valid 8 or 12 digit account number");
+                return new ValidationResult(errorMessage);
             }
         }
 

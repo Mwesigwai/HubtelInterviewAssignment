@@ -1,7 +1,7 @@
 using PhoneNumbers;
 
-namespace Hubtel.Interview.Assignment.UserWallet.HelperMethods;
-public class PhoneNumberValidatorHelper
+namespace Hubtel.Interview.Assignment.UserWallet.Validators;
+static public class PhoneNumberValidator
 {
     static public bool IsValidPhoneNumber(string phoneNumber)
     {
