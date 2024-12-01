@@ -6,6 +6,11 @@
 # dotenv files
 .env
 
+# Exclude build directories
+bin/
+obj/
+
+
 # User-specific files
 *.rsuser
 *.suo
