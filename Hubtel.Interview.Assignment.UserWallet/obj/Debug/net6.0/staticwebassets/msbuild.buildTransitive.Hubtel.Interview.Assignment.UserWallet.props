@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="../buildMultiTargeting/Hubtel.Interview.Assignment.UserWallet.props" />
-</Project>
