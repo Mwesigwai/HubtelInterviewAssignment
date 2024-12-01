@@ -7,21 +7,15 @@ public class WalletModel
     [Key]
     public string Id { get; set; } = Guid.NewGuid().ToString();
     
-    [Required]
     public string Name { get; set; } = string.Empty;
     
-    [Required]
     public WalletType Type { get; set; }
 
-    [Required]
     public string AccountNumber { get; set; } = string.Empty;
     
-    [Required]
     public WalletAccountScheme AccountScheme { get; set; }
     
-    [DataType(DataType.DateTime), Required]
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     
-    [DataType(DataType.PhoneNumber), Required]
     public string Owner { get; set; } = string.Empty;
 }

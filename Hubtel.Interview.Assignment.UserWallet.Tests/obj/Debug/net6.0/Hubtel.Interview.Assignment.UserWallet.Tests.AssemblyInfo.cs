@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Hubtel.Interview.Assignment.UserWallet.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+56a2851e930ab27db8da02baf3e3fbbf414822d7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b05f9004c1cad113e1b0f63c744d39947579de6c")]
 [assembly: System.Reflection.AssemblyProductAttribute("Hubtel.Interview.Assignment.UserWallet.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Hubtel.Interview.Assignment.UserWallet.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
